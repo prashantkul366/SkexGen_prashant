@@ -20,6 +20,7 @@ def train(args):
     device = torch.device("cuda:0")
     
     # Initialize dataset loader
+    print("Initializing dataset...")
     train_dataset = SketchData(args.train_data, args.invalid, args.maxlen)
     print(f'\n{"="*50}')
     print(f'SKETCH TRAINING SETUP')
@@ -211,4 +212,5 @@ if __name__ == "__main__":
         os.makedirs(result_folder)
         
     # Start training 
+    print("Before train")
     train(args)
