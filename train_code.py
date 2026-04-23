@@ -16,6 +16,16 @@ def train(args):
     
     # Initialize dataset loader
     dataset = CodeDataset(datapath=args.input, maxlen=args.seqlen) 
+    print(f'\n{"="*50}')
+    print(f'CODE SELECTOR TRAINING SETUP')
+    print(f'{"="*50}')
+    print(f'Code data path  : {args.input}')
+    print(f'Save path       : {args.output}')
+    print(f'Total examples  : {len(dataset)}')
+    print(f'Code seq len    : {args.seqlen}  (4 topology + 2 geometry + 4 extrude)')
+    print(f'Codebook size   : {args.code}')
+    print(f'Batch size      : {args.batchsize}')
+    print(f'{"="*50}\n')
     dataloader = torch.utils.data.DataLoader(dataset, 
                                              shuffle=True, 
                                              batch_size=args.batchsize,
@@ -76,7 +86,9 @@ def train(args):
 
         # save model after n epoch
         if (epoch+1) % 500 == 0:
-            torch.save(model.state_dict(), os.path.join(args.output,'code_epoch_'+str(epoch+1)+'.pt'))
+            save_path = os.path.join(args.output, 'code_epoch_'+str(epoch+1)+'.pt')
+            print(f'\n Saving code model at epoch {epoch+1} → {save_path}')
+            torch.save(model.state_dict(), save_path)
 
     writer.close()
 

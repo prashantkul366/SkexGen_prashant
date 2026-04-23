@@ -21,6 +21,14 @@ def train(args):
     
     # Initialize dataset loader
     train_dataset = ExtData(args.train_data, args.maxlen)
+    print(f'\n{"="*50}')
+    print(f'EXTRUDE TRAINING SETUP')
+    print(f'{"="*50}')
+    print(f'Train data path : {args.train_data}')
+    print(f'Val data path   : {args.val_data}')
+    print(f'Save path       : {args.output}')
+    print(f'Train examples  : {len(train_dataset)}')
+
     train_dataloader = torch.utils.data.DataLoader(train_dataset, 
                                              shuffle=True, 
                                              batch_size=args.batchsize,
@@ -28,6 +36,11 @@ def train(args):
                                              pin_memory=True)
 
     val_dataset = ExtData(args.val_data, args.maxlen)
+    print(f'Val examples    : {len(val_dataset)}')
+    print(f'Max ext len     : {train_dataset.maxlen_ext}')
+    print(f'Max extrudes    : {args.maxlen}')
+    print(f'Batch size      : {args.batchsize}')
+    print(f'{"="*50}\n')
     val_dataloader = torch.utils.data.DataLoader(val_dataset, 
                                              shuffle=False, 
                                              batch_size=args.batchsize,

@@ -21,6 +21,15 @@ def train(args):
     
     # Initialize dataset loader
     train_dataset = SketchData(args.train_data, args.invalid, args.maxlen)
+    print(f'\n{"="*50}')
+    print(f'SKETCH TRAINING SETUP')
+    print(f'{"="*50}')
+    print(f'Train data path   : {args.train_data}')
+    print(f'Val data path     : {args.val_data}')
+    print(f'Invalid data path : {args.invalid}')
+    print(f'Save path         : {args.output}')
+    print(f'Train examples    : {len(train_dataset)}')
+
     train_dataloader = torch.utils.data.DataLoader(train_dataset, 
                                              shuffle=True, 
                                              batch_size=args.batchsize,
@@ -28,6 +37,12 @@ def train(args):
                                              pin_memory=True)
 
     val_dataset = SketchData(args.val_data, args.invalid, args.maxlen)
+    print(f'Val examples      : {len(val_dataset)}')
+    print(f'Max pix len       : {train_dataset.maxlen_pix}')
+    print(f'Max cmd len       : {train_dataset.maxlen_cmd}')
+    print(f'Bit quantization  : {args.bit}')
+    print(f'Batch size        : {args.batchsize}')
+    print(f'{"="*50}\n')
     val_dataloader = torch.utils.data.DataLoader(val_dataset, 
                                                  shuffle=False, 
                                                  batch_size=args.batchsize,
@@ -139,6 +154,7 @@ def train(args):
 
         # save model after n epoch
         if (epoch+1) % 100 == 0:
+            print(f'\n Saving models at epoch {epoch+1} to {args.output}')
             torch.save(sketch_decoder.state_dict(), os.path.join(args.output,'sketchdec_epoch_'+str(epoch+1)+'.pt'))
             torch.save(param_encoder.state_dict(), os.path.join(args.output,'paramenc_epoch_'+str(epoch+1)+'.pt'))
             torch.save(cmd_encoder.state_dict(), os.path.join(args.output,'cmdenc_epoch_'+str(epoch+1)+'.pt'))
