@@ -106,7 +106,8 @@ def sample(args):
         max_len=10,
         classes=1000,
     )
-    code_model.load_state_dict(torch.load(os.path.join(args.code_weight, 'code_epoch_800.pt')))
+    # code_model.load_state_dict(torch.load(os.path.join(args.code_weight, 'code_epoch_800.pt')))
+    code_model.load_state_dict(torch.load(os.path.join(args.code_weight, 'code_epoch_500.pt')))
     code_model = code_model.to(device).eval()
 
     print('Random Generation...')
