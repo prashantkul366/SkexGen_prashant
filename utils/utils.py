@@ -1,8 +1,19 @@
 import os 
-from OCC.Core.gp import gp_Pnt, gp_Vec, gp_Dir, gp_XYZ, gp_Ax3, gp_Trsf, gp_Pln
-from OCC.Display.SimpleGui import init_display
-from OCC.Core.StlAPI import StlAPI_Writer
-from OCC.Core.BRepMesh import BRepMesh_IncrementalMesh
+
+try:
+    from OCC.Core.gp import gp_Pnt, gp_Vec, gp_Dir, gp_XYZ, gp_Ax3, gp_Trsf, gp_Pln
+    from OCC.Core.gp import gp_Pnt, gp_Vec, gp_Dir, gp_XYZ, gp_Ax3, gp_Trsf, gp_Pln
+    from OCC.Display.SimpleGui import init_display
+    from OCC.Core.StlAPI import StlAPI_Writer
+    from OCC.Core.BRepMesh import BRepMesh_IncrementalMesh
+except ImportError:
+    pass
+
+
+# from OCC.Core.gp import gp_Pnt, gp_Vec, gp_Dir, gp_XYZ, gp_Ax3, gp_Trsf, gp_Pln
+# from OCC.Display.SimpleGui import init_display
+# from OCC.Core.StlAPI import StlAPI_Writer
+# from OCC.Core.BRepMesh import BRepMesh_IncrementalMesh
 from pathlib import Path
 import os 
 import numpy as np 
